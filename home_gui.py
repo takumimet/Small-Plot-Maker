@@ -85,8 +85,8 @@ y_variables.set("1, 4, 9, 16, 25, 36, 49, 64, 81")
 """ COMMANDS """
 
 def extract_entries():
-    # Extract the varibles from the Entries
-    # and transform them into what we need
+    """ Extract the varibles from the Entries
+        and transform them into what we need """
     output_X = string_to_list(x_variables.get())
     output_Y = string_to_int(y_variables.get())
 
@@ -117,7 +117,7 @@ def create_plot():
         graph_plot.plot(X, Y)
     
     elif option == "Pie":
-        graph_plot.pie(X, Y)
+        graph_plot.pie(Y, labels=X)
 
     # Displays the plot
     mat_canvas.draw()
