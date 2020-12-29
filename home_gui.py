@@ -84,6 +84,16 @@ y_variables.set("1, 4, 9, 16, 25, 36, 49, 64, 81")
 
 """ COMMANDS """
 
+def extract_entries():
+    # Extract the varibles from the Entries
+    # and transform them into what we need
+    output_X = string_to_list(x_variables.get())
+    output_Y = string_to_int(y_variables.get())
+
+    return output_X, output_Y
+
+
+
 def create_plot():
     """ First extracts the data from Entries
         adds new plot into Figure instance
@@ -93,30 +103,33 @@ def create_plot():
     # because if you change something 
     # right now it doesn't raise an error
 
-    # Extract the varibles from the Entries
-    # and transform them into what we need
-    output_X = string_to_list(x_variables.get())
-    output_Y = string_to_int(y_variables.get())
+    X, Y = extract_entries()    
+    option = options_click.get()
+    mat_fig.clear()
 
     # Adds the new plot unto the Figure instance
     graph_plot = mat_fig.add_subplot(111)
     # Plots the data
-    graph_plot.bar(output_X, output_Y,
-                   tick_label=output_X)
-           
+    if option == "Bar":
+        graph_plot.bar(X, Y,
+                   tick_label=X)
+    elif option == "Line":
+        graph_plot.plot(X, Y)
+    
+    elif option == "Pie":
+        graph_plot.pie(X, Y)
+
     # Displays the plot
     mat_canvas.draw()
 
-
-
-
-
+ 
 """ ENTRIES """
 
 entry_x = tk.Entry(options_frame,
                    textvariable=x_variables,
                    width=40)
 entry_x.grid(row=1, column=1)
+
 
 entry_y = tk.Entry(options_frame,
                    textvariable=y_variables,
