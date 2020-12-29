@@ -1,4 +1,5 @@
 import tkinter as tk
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, 
@@ -8,9 +9,11 @@ from matplotlib.backends.backend_tkagg import (
 from string_process import (
     NotANumber,
     string_to_int,
-    string_to_list
+    string_to_list,
     has_decimals
 )
+
+plt.style.use("seaborn")
 
 """ ROOT CHARACTERISTICS """
 root = tk.Tk()
@@ -82,7 +85,30 @@ y_variables.set("1, 4, 9, 16, 25, 36, 49, 64, 81")
 """ COMMANDS """
 
 def create_plot():
-    pass
+    """ First extracts the data from Entries
+        adds new plot into Figure instance
+        and then plot the data in root window """
+
+    # TODO Ensure only x_ticks are shown
+    # because if you change something 
+    # right now it doesn't raise an error
+
+    # Extract the varibles from the Entries
+    # and transform them into what we need
+    output_X = string_to_list(x_variables.get())
+    output_Y = string_to_int(y_variables.get())
+
+    # Adds the new plot unto the Figure instance
+    graph_plot = mat_fig.add_subplot(111)
+    # Plots the data
+    graph_plot.bar(output_X, output_Y,
+                   tick_label=output_X)
+           
+    # Displays the plot
+    mat_canvas.draw()
+
+
+
 
 
 """ ENTRIES """
